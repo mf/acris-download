@@ -1,11 +1,9 @@
 FROM mysql:8.0
 
-RUN apt update \
- && apt update \
- && apt install -y \
+RUN microdnf install -y \
     curl \
     make \
- && rm -rf /var/lib/apt/lists/*
+ && microdnf clean all
 
 WORKDIR app
 
