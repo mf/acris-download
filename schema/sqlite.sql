@@ -1,89 +1,97 @@
 CREATE TABLE IF NOT EXISTS country_codes (
-    recordtype varchar,
-    countrycode varchar,
-    countrydescription varchar
+    recordtype text,
+    countrycode text,
+    countrydescription text
 );
 
 CREATE TABLE IF NOT EXISTS document_control_codes (
-    recordtype varchar,
-    doctype varchar,
-    doctypedescription varchar,
-    classcodedescription varchar,
-    party1type varchar,
-    party2type varchar,
-    party3type varchar
+    recordtype text,
+    doctype text,
+    doctypedescription text,
+    classcodedescription text,
+    party1type text,
+    party2type text,
+    party3type text
 );
 
 CREATE TABLE IF NOT EXISTS property_type_codes (
-    recordtype varchar,
-    propertytype varchar,
-    typedescription varchar
+    recordtype text,
+    propertytype text,
+    typedescription text
 );
 
 CREATE TABLE IF NOT EXISTS real_property_legals (
-    documentid bigint,
-    recordtype varchar,
+    documentid text not null,
+    recordtype text,
     borough integer,
     block integer,
     lot integer,
-    easement boolean,
-    partiallot varchar,
-    airrights boolean,
-    subterraneanrights boolean,
-    propertytype varchar,
-    streetnumber varchar,
-    streetname varchar,
-    unit varchar,
-    goodthroughdate date
+    easement text,
+    partiallot text,
+    airrights text,
+    subterraneanrights text,
+    propertytype text,
+    streetnumber text,
+    streetname text,
+    unit text,
+    goodthroughdate text
 );
 
 CREATE TABLE IF NOT EXISTS real_property_master (
-    documentid bigint not null,
-    recordtype varchar,
+    documentid text not null,
+    recordtype text,
     crfn bigint,
     borough integer,
-    doctype varchar,
-    docdate date,
+    doctype text,
+    docdate text,
     docamount numeric,
-    recordedfiled date,
-    modifieddate date,
+    recordedfiled text,
+    modifieddate text,
     reelyear integer,
     reelnbr integer,
     reelpage integer,
     perctransferred numeric,
-    goodthroughdate date
+    goodthroughdate text
 );
 
 CREATE TABLE IF NOT EXISTS real_property_parties (
-    documentid bigint,
-    recordtype varchar,
+    documentid text not null,
+    recordtype text,
     partytype integer,
-    name varchar,
-    address1 varchar,
-    address2 varchar,
-    country varchar,
-    city varchar,
-    state varchar,
-    zip varchar,
-    goodthroughdate date
+    name text,
+    address1 text,
+    address2 text,
+    country text,
+    city text,
+    state text,
+    zip text,
+    goodthroughdate text
 );
 
 CREATE TABLE IF NOT EXISTS real_property_references (
-    documentid bigint,
-    recordtype varchar,
-    referencebycrfn varchar,
-    referencebydocid varchar,
+    documentid text not null,
+    recordtype text,
+    referencebycrfn text,
+    referencebydocid text,
     referencebyreelyear integer,
     referencebyreelborough integer,
     referencebyreelnbr integer,
     referencebyreelpage integer,
-    not_used_1 boolean,
-    not_used_2 boolean,
-    goodthroughdate timestamp
+    not_used_1 text,
+    not_used_2 text,
+    goodthroughdate text
+);
+
+CREATE TABLE IF NOT EXISTS real_property_remarks (
+    documentid text not null,
+    recordtype text,
+    sequencenumber integer,
+    remarktext text,
+    goodthroughdate text
 );
 
 CREATE TABLE IF NOT EXISTS ucc_collateral_codes (
-    recordtype varchar,
-    ucccollateralcode varchar,
-    codedescription varchar
+    recordtype text,
+    ucccollateralcode text,
+    codedescription text
 );
