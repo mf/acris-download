@@ -88,16 +88,25 @@ SQLITE_DATABASE = acris.db
 
 sqlite = sqlite3 $(SQLITE_DATABASE)
 
-curlflags = -XGET -GLsS --compressed
+curlflags = -XGET -GLS --compressed
 curl = curl $(curlflags)
 
 .PHONY: clean install download \
+	download_real download_personal download_extras download_all download_select \
 	clean-docker test_% \
 	sqlite sqlite_% \
 	psql psql_% \
 	mysql mysql_%
 
 download: $(foreach a,$(REAL_BASIC) $(EXTRAS),data/$a.csv)
+download_real: $(foreach a,$(REAL_BASIC) $(REAL_REF),data/$a.csv)
+download_personal: $(foreach a,$(PERSONAL_BASIC) $(PERSONAL_REF),data/$a.csv)
+download_extras: $(foreach a,$(EXTRAS),data/$a.csv)
+download_all: $(foreach a,$(DATA),data/$a.csv)
+
+# Download individual CSVs: make data/personal_property_legals.csv
+# Or pass DATASETS: make download_select DATASETS="personal_property_legals personal_property_master"
+download_select: $(foreach a,$(DATASETS),data/$a.csv)
 
 sqlite: $(foreach a,$(REAL_BASIC),sqlite_$a) | sqlite_extras
 sqlite_real_complete: $(foreach a,$(REAL_REF),sqlite_$a) | sqlite
